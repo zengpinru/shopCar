@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<link rel="stylesheet" type="text/css" href="./public/css/index.css" />
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<template v-if="list.length">
+				<div class="shopCarTable">
+					<table border="1" cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th><input type="checkbox" @click="checkedAll" ref='checkedAll' /></th>
+								<th>ID</th>
+								<th>商品名称</th>
+								<th>单价</th>
+								<th>购买数量</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(item,index) in list">
+								<td><input type="checkbox" v-model="checked" :value="item.id" /></td>
+								<td>{{ index+1 }}</td>
+								<td>{{ item.name }}</td>
+								<td>{{ item.price }}</td>
+								<td>
+									<button @click="handleReduce(index)" :disabled="item.count===1">-</button> {{ item.count }}
+									<button @click="handleAdd(index)">+</button>
+								</td>
+								<td><button @click="handleRemove(index)">移除</button></td>
+							</tr>
+						</tbody>
+					</table>
+					<div>总价格：{{ totalPrice }}</div>
+				</div>
+			</template>
+			<div v-else>购物车为空</div>
+		</div>
+	</body>
+	<script src="./public/js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./public/js/index.js" type="text/javascript" charset="utf-8"></script>
+
+</html>
